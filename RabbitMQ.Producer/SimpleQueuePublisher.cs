@@ -17,6 +17,11 @@ namespace RabbitMQ.Producer
             var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
 
             channel.BasicPublish("", "demo-queue", null, body);
+
+            Console.WriteLine($" [x] Sent {message}");
+
+            Console.WriteLine(" Press [enter] to exit.");
+            Console.ReadLine();
         }
     }
 }

@@ -14,6 +14,11 @@ namespace RabbitMQ.Producer
             var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
 
             channel.BasicPublish(exchange: "ex.direct", routingKey: "myBindingKey", basicProperties: null, body: body);
+
+            Console.WriteLine($" [x] Sent {message}");
+
+            Console.WriteLine(" Press [enter] to exit.");
+            Console.ReadLine();
         }
     }
 }
