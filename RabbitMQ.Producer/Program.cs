@@ -16,9 +16,10 @@ internal static class Program
         // uncomment the rabbitmq pattern you want to use
         */
 
-        SimpleQueuePublisher.Publish(channel);
+        //SimpleQueuePublisher.Publish(channel);
         //DirectExchangePublisher.Publish(channel);
         //WorkQueuesPublisher.Publish(channel);
         //FanoutExchangePublisher.Publish(channel);
+        RoutingPublisher.Publish(channel);
     }
 }
