@@ -18,6 +18,7 @@ internal static class Program
 
         SimpleQueuePublisher.Publish(channel);
         //DirectExchangePublisher.Publish(channel);
+        //WorkQueuesPublisher.Publish(channel);
         //FanoutExchangePublisher.Publish(channel);
     }
 }

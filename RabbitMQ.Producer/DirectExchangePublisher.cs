@@ -8,12 +8,15 @@ namespace RabbitMQ.Producer
     {
         public static void Publish(IModel channel)
         {
-            channel.ExchangeDeclare(exchange: "ex.direct", type: ExchangeType.Direct);
+            var exchangeName = "ex.direct";
+            var routingKey = "myBindingKey";
+
+            channel.ExchangeDeclare(exchange: exchangeName, type: ExchangeType.Direct);
 
             var message = new { Name = "Producer", Message = "Hello!" };
             var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
 
-            channel.BasicPublish(exchange: "ex.direct", routingKey: "myBindingKey", basicProperties: null, body: body);
+            channel.BasicPublish(exchange: exchangeName, routingKey: routingKey, basicProperties: null, body: body);
 
             Console.WriteLine($" [x] Sent {message}");
 

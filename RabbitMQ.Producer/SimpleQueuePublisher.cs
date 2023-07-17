@@ -8,7 +8,9 @@ namespace RabbitMQ.Producer
     {
         public static void Publish(IModel channel)
         {
-            channel.QueueDeclare("demo-queue",
+            var queueName = "demo-queue";
+
+            channel.QueueDeclare(queue: queueName,
             durable: true,
             exclusive: false,
             autoDelete: false,
@@ -16,7 +18,7 @@ namespace RabbitMQ.Producer
             var message = new { Name = "Producer", Message = "Hello!" };
             var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
 
-            channel.BasicPublish("", "demo-queue", null, body);
+            channel.BasicPublish(exchange: string.Empty, routingKey: queueName, basicProperties: null, body: body);
 
             Console.WriteLine($" [x] Sent {message}");
 

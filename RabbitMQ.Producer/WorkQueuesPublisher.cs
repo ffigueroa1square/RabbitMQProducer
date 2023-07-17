@@ -4,13 +4,21 @@ using System.Text;
 
 namespace RabbitMQ.Producer
 {
-    public static class FanoutExchangePublisher
+    public static class WorkQueuesPublisher
     {
         public static void Publish(IModel channel)
         {
-            var exchangeName = "ex.fanout";
+            var queueName = "q.workQueue";
 
-            channel.ExchangeDeclare(exchange: exchangeName, type: ExchangeType.Fanout);
+            channel.QueueDeclare(queue: queueName,
+            durable: true,
+            exclusive: false,
+            autoDelete: false,
+            arguments: null);
+
+            var properties = channel.CreateBasicProperties();
+            properties.Persistent = true;
+
             var count = 0;
 
             while (true)
@@ -18,7 +26,7 @@ namespace RabbitMQ.Producer
                 var message = new { Name = "Producer", Message = $"Hello! Count: {count}" };
                 var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
 
-                channel.BasicPublish(exchange: exchangeName, routingKey: string.Empty, basicProperties: null, body: body);
+                channel.BasicPublish(exchange: string.Empty, routingKey: queueName, basicProperties: properties, body: body);
                 Console.WriteLine($" [x] Sent {message}");
                 count++;
                 Thread.Sleep(1000);
