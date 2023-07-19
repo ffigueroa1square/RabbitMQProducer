@@ -20,6 +20,7 @@ internal static class Program
         //DirectExchangePublisher.Publish(channel);
         //WorkQueuesPublisher.Publish(channel);
         //FanoutExchangePublisher.Publish(channel);
-        RoutingPublisher.Publish(channel);
+        //RoutingPublisher.Publish(channel);
+        TopicsExchangePublisher.Publish(channel);
     }
 }
