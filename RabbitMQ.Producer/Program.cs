@@ -21,6 +21,7 @@ internal static class Program
         //WorkQueuesPublisher.Publish(channel);
         //FanoutExchangePublisher.Publish(channel);
         //RoutingPublisher.Publish(channel);
-        TopicsExchangePublisher.Publish(channel);
+        //TopicsExchangePublisher.Publish(channel);
+        HeadersExchangePublisher.Publish(channel);
     }
 }
